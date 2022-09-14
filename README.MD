@@ -18,5 +18,5 @@ All parameters are needed.
 
 # Links
 
-- [^1] https://kiermeier.solutions/skas.htm
-- [^2] https://shelly.cloud/products/shelly-plug-s-smart-home-automation-device/
+- [^1]: https://kiermeier.solutions/skas.htm
+- [^2]: https://shelly.cloud/products/shelly-plug-s-smart-home-automation-device/
