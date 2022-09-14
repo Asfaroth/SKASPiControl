@@ -16,7 +16,5 @@ In order to be compatible with as many setups as possible, the relevant paramete
 An example of such a file can be seen in this repo in the `settings Example.json` file.
 All parameters are needed.
 
-# Links
-
-- [^1]: https://kiermeier.solutions/skas.htm
-- [^2]: https://shelly.cloud/products/shelly-plug-s-smart-home-automation-device/
+[^1]: https://kiermeier.solutions/skas.htm
+[^2]: https://shelly.cloud/products/shelly-plug-s-smart-home-automation-device/
