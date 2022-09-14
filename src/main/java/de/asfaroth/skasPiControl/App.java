@@ -9,8 +9,9 @@ import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
@@ -36,7 +37,9 @@ public class App {
     try {
       // First applying settings. If the settings file is not present the application
       // will not start.
-      JSONObject settings = new JSONObject(Files.readString(Path.of("settings.json")));
+
+      JSONObject settings = new JSONObject(String.join("",
+          Files.readAllLines(Paths.get("settings.json"), StandardCharsets.UTF_8)));
 
       Client[] clients = new Client[settings.getJSONArray("clients").length()];
       for (int i = 0; i < settings.getJSONArray("clients").length(); i++) {
