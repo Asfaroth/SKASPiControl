@@ -1,0 +1,16 @@
+{
+  "shelly_properties": {
+    "ip": "192.168.178.2",
+    "shutdown_time": 60
+  },
+  "whitelist_ips": ["127.0.0.1"],
+  "server_port": 8000,
+  "paths": {
+    "toggle": "/toggle",
+    "stop": "/stop"
+  },
+  "request_timeout": 5000,
+  "clients": [
+    { "ip": "192.168.178.11", "port": 22, "user": "pi", "pass": "raspberry" }
+  ]
+}
