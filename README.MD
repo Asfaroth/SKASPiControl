@@ -1,7 +1,7 @@
 # SKAS Pi Control
 
-This repository holds the code needed to properly shut down the terminal Raspberry Pis for a SKAS[1] shooting range setup.
-The Pis are shut down via SSH and the power is controlled via a Shelly Plug S[2].
+This repository holds the code needed to properly shut down the terminal Raspberry Pis for a SKAS[^1] shooting range setup.
+The Pis are shut down via SSH and the power is controlled via a Shelly Plug S[^2].
 
 # Build
 
@@ -18,5 +18,5 @@ All parameters are needed.
 
 # Links
 
-[1] https://kiermeier.solutions/skas.htm
-[2] https://shelly.cloud/products/shelly-plug-s-smart-home-automation-device/
+- [^1] https://kiermeier.solutions/skas.htm
+- [^2] https://shelly.cloud/products/shelly-plug-s-smart-home-automation-device/
