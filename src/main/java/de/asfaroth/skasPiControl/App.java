@@ -128,9 +128,11 @@ public class App {
         }
         serverSocket.close();
       } catch (IOException ex) {
+        System.err.println("Error while setting up the ServerSocket. Aborting.");
         ex.printStackTrace();
       }
     } catch (IOException ex) {
+      System.err.println("Error while setting up the Application. Aborting.");
       ex.printStackTrace();
     }
   }
@@ -171,8 +173,25 @@ public class App {
       if (parsedInfo.getBoolean("ison")) {
         System.out.println("Now starting the shutdown routine.");
 
-        for (Client client : clients) {
-          shutdown(client);
+        Thread[] shutdownThreads = new Thread[clients.length];
+        for (int i = 0; i < clients.length; i++) {
+          final Client client = clients[i];
+          shutdownThreads[i] = new Thread(new Runnable() {
+            @Override
+            public void run() {
+              shutdown(client);
+            }
+          });
+          shutdownThreads[i].start();
+        }
+        // waiting for every Thread to finish
+        for (Thread thread : shutdownThreads) {
+          try {
+            thread.join();
+          } catch (InterruptedException ex) {
+            System.err.println("Error while joining Thread. Skipping this Thread now.");
+            ex.printStackTrace();
+          }
         }
 
         System.out.println("Now turning off Shelly...");
@@ -200,7 +219,7 @@ public class App {
       session.setPassword(client.password);
       session.setConfig(config);
       session.connect();
-      System.out.println("Connected");
+      System.out.println("  Connected to " + client.ip);
 
       Channel channel = session.openChannel("exec");
       ((ChannelExec) channel).setCommand("sudo shutdown now");
@@ -208,8 +227,9 @@ public class App {
 
       channel.disconnect();
       session.disconnect();
-      System.out.println("Shutdown of " + client.ip + " executed.");
+      System.out.println("  Shutdown of " + client.ip + " executed.");
     } catch (JSchException ex) {
+      System.err.println("Error while connecting to client for shutdown. Skipping shutdown process.");
       ex.printStackTrace();
     }
   }
@@ -235,8 +255,10 @@ public class App {
       }
       return result.toString();
     } catch (MalformedURLException ex) {
+      System.err.println("Malformed URL detected. Skipping Request.");
       ex.printStackTrace();
     } catch (IOException ex) {
+      System.err.println("Error while executing request. Skipping.");
       ex.printStackTrace();
     }
     return "";
